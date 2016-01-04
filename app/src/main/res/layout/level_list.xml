@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    android:gravity="center_horizontal">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/levels"
+        android:fontFeatureSettings="\@assets/"
+        android:id="@+id/tvLevels"
+        android:textAlignment="gravity"
+        android:textColor="#e6e656"
+        android:typeface="serif"
+        android:layout_gravity="center_horizontal" />
+    <GridView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:columnCount="6"
+        android:rowCount="8"
+        android:id="@+id/gridView"></GridView>
+
+</LinearLayout>

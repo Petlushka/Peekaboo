@@ -1,64 +1,46 @@
 package com.petlushka.peekaboo;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.graphics.Point;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Display;
-import android.view.View;
 import android.widget.Button;
+import android.widget.GridView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
-public class LevelsActivity extends Activity implements View.OnClickListener {
+import java.util.ArrayList;
 
-    RelativeLayout relLayout;
+public class LevelsActivity extends Activity {
+
+
     private int width;
     private int height;
-    private int maxLevel = 48;
-    private int levelNum;
+    GridView gridView;
+    TextView tvLevels;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_level_list);
+        setContentView(R.layout.level_list);
         Display display = getWindowManager().getDefaultDisplay();
         Point resolution = new Point();
         display.getSize(resolution);
+
         width = resolution.x;
         height = resolution.y;
-        relLayout = (RelativeLayout)findViewById(R.id.relLayout);
-        int buttonWidth = width /7;
-    //    RelativeLayout.LayoutParams lpView = new RelativeLayout.LayoutParams(buttonWidth, buttonWidth);
-        int xButton = 0;
-        int yButton = buttonWidth /2;
-
-        for(int i = 1; i < 49; i++){
-            Button button = new Button(this);
-            button.setText("" + i);
-            button.setPadding(2,2,2,2);
-            relLayout.addView(button, buttonWidth, buttonWidth);
-            if((xButton + buttonWidth *2) >= width){
-                xButton = 0;
-                yButton += buttonWidth;
-            }
-            button.setX(xButton);
-            button.setY(yButton);
-            button.setTag(i);
-            button.setOnClickListener(this);
-            if(i > maxLevel) {
-                button.setEnabled(false);
-            }
-            xButton += buttonWidth;
+        int buttonWidth = width / 6;
+        int [] data = new int [48] ;
+        for(int i = 0; i < 48; i ++){
+            data[i] = i+1;
         }
-
-
-    }
-
-    @Override
-    public void onClick(View v) {
-        int lv = (int)v.getTag();
-        Intent intent = new Intent(getApplicationContext(), GameActivity.class);
-        intent.putExtra("level", lv);
-        startActivity(intent);
+        gridView = (GridView)findViewById(R.id.gridView);
+        ButtonsAdapter adapter = new ButtonsAdapter(this, data);
+        gridView.setAdapter(adapter);
+        gridView.setNumColumns(6);
+        tvLevels = (TextView)findViewById(R.id.tvLevels);
+        tvLevels.setTypeface(Typeface.createFromAsset(this.getAssets(), "Bobblebod.ttf"));
+        tvLevels.setTextSize(buttonWidth * 0.5f);
     }
 }
