@@ -1,7 +1,14 @@
 <resources>
     <string name="app_name">Peekaboo</string>
     <string name="levels">Levels</string>
+    <string name="level">Level </string>
     <string name="menu">Menu</string>
+    <string name="play">PLAY</string>
+    <string name="instruction">INSTRUCTION</string>
+    <string name="quit">QUIT</string>
+    <string name="sound_on">SOUND ON</string>
+    <string name="sound_off">SOUND OFF</string>
+    <string name="language">ENGLISH</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_main2">Main2Activity</string>

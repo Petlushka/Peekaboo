@@ -2,6 +2,8 @@ package com.petlushka.peekaboo;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,10 +19,16 @@ public class ButtonsAdapter extends BaseAdapter {
 
     Context ctx;
     int [] data;
+    int diametr;
+    int levelMax;
+    SharedPreferences sPref;
 
-    public ButtonsAdapter(Context ctx, int [] data) {
+    public ButtonsAdapter(Context ctx, int [] data, int diametr) {
         this.ctx = ctx;
         this.data = data;
+        this.diametr = diametr;
+        sPref = ctx.getSharedPreferences("MyPref", ctx.MODE_PRIVATE);
+        levelMax = sPref.getInt("levelMax", 0);
     }
 
 
@@ -48,7 +56,17 @@ public class ButtonsAdapter extends BaseAdapter {
         } else {
             button = (Button)convertView;
         }
+        if(position >= levelMax){
+            button.setEnabled(false);
+            button.setAlpha(0.5f);
+        }
         button.setId(data[position]);
+        button.setTextSize(diametr * 0.2f);
+        button.setWidth(diametr);
+        button.setHeight(diametr);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+            button.setBackground(ctx.getResources().getDrawable(R.drawable.button));
+        }
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -61,4 +79,12 @@ public class ButtonsAdapter extends BaseAdapter {
         return button;
     }
 
+    public void setLevelMax(int levelMax){
+        this.levelMax = levelMax;
+
+    }
+
+    public int getLevelMax() {
+        return levelMax;
+    }
 }

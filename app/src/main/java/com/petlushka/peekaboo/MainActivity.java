@@ -10,7 +10,7 @@ import com.vk.sdk.VKSdk;
 
 public class MainActivity extends Activity implements View.OnClickListener{
 
-    Button btnPlay, btnRules, btnQuit;
+    Button btnPlay, btnQuit;
 
 
     @Override
@@ -22,8 +22,6 @@ public class MainActivity extends Activity implements View.OnClickListener{
         btnPlay = (Button)findViewById(R.id.btnPlay);
         btnPlay.setOnClickListener(this);
 
-        btnRules = (Button)findViewById(R.id.btnRules);
-        btnRules.setOnClickListener(this);
 
         btnQuit = (Button)findViewById(R.id.btnQuit);
         btnQuit.setOnClickListener(this);
@@ -40,9 +38,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
                 intent = new Intent(this, LevelsActivity.class);
                 startActivity(intent);
                 break;
-            case R.id.btnRules:
 
-                break;
             case R.id.btnQuit:
                 finish();
                 break;

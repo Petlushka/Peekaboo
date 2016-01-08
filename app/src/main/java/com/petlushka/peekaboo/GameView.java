@@ -1,6 +1,8 @@
 package com.petlushka.peekaboo;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -24,7 +26,6 @@ public class GameView extends SurfaceView implements Runnable{
     private Paint paint;
     private Canvas canvas;
     private SurfaceHolder ourHolder;
-    Matrix matrix;
 
     Context context;
     private int pixelsPerMetreX;
@@ -32,34 +33,45 @@ public class GameView extends SurfaceView implements Runnable{
     private int screenXResolution;
     private int screenYResolution;
     Figure [] figures = new Figure[4];
-    int[][] figurePosition = {{1, 30}, {6, 30}, {11, 30}, {16, 30}};
+    int[][] figurePosition;
     GameField field;
     Animals[] animals;
-    int [][] animalsPosition = {{6, 3}, {11, 3}, {8, 6}, {3, 6}, {13, 6}};
+    int [][] animalsPosition;
     int startX;
     int startY;
     int index = -1;
     int [][] result;
     int [][] target;
+  //  int [][] positions;
     LevelManager lm;
     int level;
+    SharedPreferences spref;
+    SharedPreferences.Editor ed;
+
 
     public GameView(Context context, int width, int height, int level) {
         super(context);
         this.context = context;
         ourHolder = getHolder();
         paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        spref = context.getSharedPreferences("MyPref", Context.MODE_PRIVATE);
+        ed = spref.edit();
         screenXResolution = width;
         screenYResolution = height;
-        pixelsPerMetreX = screenXResolution / 20;
-        pixelsPerMetreY = screenYResolution / 34;
+        if(isPortraitOrientation()){
 
-
+            pixelsPerMetreX = screenXResolution / 20;
+            pixelsPerMetreY = screenYResolution / 34;
+            figurePosition = new int[][]{{1, 30}, {6, 30}, {11, 30}, {16, 30}};
+            animalsPosition = new int[][] {{6, 3}, {11, 3}, {8, 6}, {3, 6}, {13, 6}};
+        } else {
+            pixelsPerMetreX = screenXResolution / 34;
+            pixelsPerMetreY = screenYResolution / 20;
+            figurePosition = new int[][]{{29, 1}, {29, 6}, {29, 11}, {29, 16}};
+            animalsPosition = new int[][] {{2, 5}, {2, 8}, {2, 11}, {2, 14}, {2, 17}};
+        }
         this.level = level;
         loadLevel(level);
-
-
-
     }
 
     @Override
@@ -73,7 +85,6 @@ public class GameView extends SurfaceView implements Runnable{
 
     private void draw() {
         if(ourHolder.getSurface().isValid()){
-
             canvas = ourHolder.lockCanvas();
             canvas.drawColor(Color.YELLOW);
             paint.setTextAlign(Paint.Align.CENTER);
@@ -81,7 +92,11 @@ public class GameView extends SurfaceView implements Runnable{
             paint.setTextSize(50);
             paint.setStyle(Paint.Style.STROKE);
             paint.setTypeface(Typeface.createFromAsset(getContext().getAssets(), "Bobblebod.ttf"));
-            canvas.drawText("LEVEL " + level, 10 * pixelsPerMetreX, 2 * pixelsPerMetreY, paint);
+            if(isPortraitOrientation()) {
+                canvas.drawText("LEVEL " + level, 10 * pixelsPerMetreX, 2 * pixelsPerMetreY, paint);
+            } else {
+                canvas.drawText("LEVEL "+ level, 4 * pixelsPerMetreX,3 * pixelsPerMetreY, paint);
+            }
             paint.setTextAlign(Paint.Align.LEFT);
             paint.setTextSize(35);
             canvas.drawBitmap(field.prepareBitmap(getContext()), field.getX(), field.getY(), paint);
@@ -94,17 +109,21 @@ public class GameView extends SurfaceView implements Runnable{
                 canvas.drawBitmap(figures[i].prepareBitmap(getContext()), figures[i].getX(), figures[i].getY(), paint);
 
             }
-            if(isCorrectSolution()) {
+            if (isCorrectSolution()) {
                 paint.setTextAlign(Paint.Align.CENTER);
                 paint.setColor(Color.BLACK);
                 paint.setTextSize(50);
                 paint.setStyle(Paint.Style.STROKE);
                 paint.setTypeface(Typeface.createFromAsset(getContext().getAssets(), "Bobblebod.ttf"));
-                canvas.drawText("Congratulations!!!", 10 * pixelsPerMetreX, 30 * pixelsPerMetreY, paint);
-                int resID = context.getResources().getIdentifier("button", "drawable", context.getPackageName());
-                Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), resID);
-                bitmap = Bitmap.createScaledBitmap(bitmap, 6 * pixelsPerMetreX,  2 * pixelsPerMetreY, false);
-                canvas.drawBitmap(bitmap, 7 * pixelsPerMetreX, 31 * pixelsPerMetreY, paint);
+                if(isPortraitOrientation()) {
+                    canvas.drawText("Congratulations!!!", 10 * pixelsPerMetreX, 30 * pixelsPerMetreY, paint);
+                    int resID = context.getResources().getIdentifier("button", "drawable", context.getPackageName());
+                    Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), resID);
+                    bitmap = Bitmap.createScaledBitmap(bitmap, 6 * pixelsPerMetreX, 2 * pixelsPerMetreY, false);
+                    canvas.drawBitmap(bitmap, 7 * pixelsPerMetreX, 31 * pixelsPerMetreY, paint);
+                } else {
+
+                }
 
             }
 
@@ -122,6 +141,7 @@ public class GameView extends SurfaceView implements Runnable{
 
     public void pause() {
         running = false;
+        save();
         try {
             gameThread.join();
         } catch (InterruptedException e) {
@@ -133,7 +153,8 @@ public class GameView extends SurfaceView implements Runnable{
         running = true;
         gameThread = new Thread(this);
         gameThread.start();
-
+        loadLevel(level);
+        load();
     }
 
 
@@ -212,6 +233,12 @@ public class GameView extends SurfaceView implements Runnable{
                 case MotionEvent.ACTION_UP:
                     if(level < 48){
                         level++;
+
+                        Log.d("MyLogs", " " + level);
+                        ed.remove("levelMax");
+                        ed.putInt("levelMax", level);
+                        ed.commit();
+                        Log.d("MyLogs", " " + spref.getInt("levelMax", -1));
                         loadLevel(level);
                     } else {
 
@@ -245,10 +272,53 @@ public class GameView extends SurfaceView implements Runnable{
         for (int i = 0; i < 4; i++) {
             figures[i] = new Figure(figurePosition[i][0] * pixelsPerMetreX, figurePosition[i][1] * pixelsPerMetreY, 3 * pixelsPerMetreX, i+1);
         }
-        field = new GameField(pixelsPerMetreX, 9 * pixelsPerMetreY, 18 * pixelsPerMetreX);
+        if(!isPortraitOrientation())
+            field = new GameField(8 * pixelsPerMetreX, pixelsPerMetreY, 18 * pixelsPerMetreX);
+        else
+            field = new GameField(pixelsPerMetreX, 9 * pixelsPerMetreY, 18 * pixelsPerMetreX);
+
         animals = new Animals[target.length];
+
         for(int i = 0; i < animals.length; i++){
             animals[i] = new Animals(animalsPosition[i][0]*pixelsPerMetreX, animalsPosition[i][1] * pixelsPerMetreY, 2 * pixelsPerMetreX, target[i][0]);
+        }
+    }
+
+    private boolean isPortraitOrientation(){
+        if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT)
+            return true;
+        else if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE)
+            return false;
+        else
+            return true;
+    }
+    public void save(){
+        for(int i = 1; i <=4; i++) {
+            ed.putInt("figure" + i + "position", figures[i-1].getPosition());
+            ed.putInt("figure" + i + "X", figures[i-1].getX());
+            ed.putInt("figure" + i + "Y", figures[i-1].getY());
+            Log.d("MyLogs", "save figure " + i + " - " + figures[i-1].getPosition() + " " + figures[i-1].getRotation());
+        }
+        ed.commit();
+    }
+
+    public void load(){
+        int halfWidth = field.getWidth() / 2;
+        int [][] positions = new int [][]{{field.getX(), field.getY()},
+                {field.getX() + halfWidth, field.getY()},
+                {field.getX(), field.getY() + halfWidth},
+                {field.getX() + halfWidth, field.getY() + halfWidth} };
+        for(int i = 1; i <= 4; i++) {
+            figures[i-1].setPosition(spref.getInt("figure" + i + "position", 0));
+            figures[i-1].setRotation(spref.getInt("figure" + i + "rotation", 1));
+
+            int pos = figures[i-1].getPosition();
+            if(pos > 0){
+                figures[i-1].setX(positions[pos-1][0]);
+                figures[i-1].setY(positions[pos-1][1]);
+                figures[i-1].setHeight(9 * pixelsPerMetreX);
+                figures[i-1].setWidth(9 * pixelsPerMetreX);
+            }
         }
     }
 
