@@ -14,4 +14,19 @@
     <string name="title_activity_main2">Main2Activity</string>
     <string name="title_activity_level_list">LevelList</string>
     <integer name="com_vk_sdk_AppId">5210101</integer>
+    <string name="next_level">NEXT LEVEL</string>
+    <string name="main_menu">MAIN MENU</string>
+    <string name="win">YOU WIN!!!</string>
+    <string name="ok">OK</string>
+    <string name="logo">Logo</string>
+    <string name="target">TARGET</string>
+    <string name="title_activity_instructions">Instructions</string>
+    <string name="back">BACK</string>
+    <string name="next">NEXT</string>
+    <string name="instruction1">This is target for the current level</string>
+    <string name="instruction2">This is the game field. You need to close this field by the figures, which are located at the bottom of the screen,
+     so that left only those monsters that are specified in the target.</string>
+    <string name="instruction3">You can move the figures at the bottom of the screen to the game field.</string>
+    <string name="instruction4">You can rotate this figures by the clicking on them.</string>
+    <string name="instruction5">Level complete</string>
 </resources>

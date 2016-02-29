@@ -12,12 +12,10 @@ abstract class GameObjects{
     private int width;
     private int height;
     private int x;
-
-
     private int y;
     private String bitmapName;
 
-       public int getX() {
+    public int getX() {
         return x;
     }
 
@@ -28,8 +26,6 @@ abstract class GameObjects{
     public String getBitmapName() {
         return bitmapName;
     }
-
-    public abstract void update();
 
     public Bitmap prepareBitmap(Context context) {
         int resID = context.getResources().getIdentifier(bitmapName, "drawable", context.getPackageName());
@@ -58,11 +54,9 @@ abstract class GameObjects{
         this.y = y;
     }
 
-
     public int getWidth() {
         return width;
     }
-
 
     public int getHeight() {
         return height;

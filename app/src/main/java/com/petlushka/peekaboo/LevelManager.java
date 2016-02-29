@@ -7,15 +7,15 @@ public class LevelManager {
 
     private int level;
     private boolean playing;
-    LevelData data;
+    private LevelData data;
     private int [][] result;
     private int[][] target;
 
     public LevelManager(int level){
         this.level = level;
         data = new LevelData();
-        result = data.result[level - 1];
-        target = data.target[level - 1];
+        result = data.getResult()[level - 1];
+        target = data.getTarget()[level - 1];
     }
 
     public int[][] getResult() {

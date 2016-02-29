@@ -18,46 +18,57 @@
         android:src="@drawable/title"
         android:contentDescription="@string/app_name"
         android:layout_gravity="center_horizontal"
-        android:paddingTop="30sp" />
+        android:layout_weight="1" />
 
-    <Button
-        android:layout_width="wrap_content"
+    <ImageView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/play"
-        android:id="@+id/btnPlay"
+        android:id="@+id/imageView3"
+        android:src="@drawable/logo"
+        android:layout_weight="1"
+        android:contentDescription="@string/logo"
+        android:cropToPadding="false" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:background="@drawable/button_long" />
+        android:gravity="center_horizontal"
+        android:layout_weight="1">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/instruction"
-        android:id="@+id/btnInstruction"
-        android:layout_gravity="center_horizontal"
-        android:background="@drawable/button_long" />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/play"
+            android:id="@+id/btnPlay"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/button_long"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:textSize="25sp" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/sound_on"
-        android:id="@+id/btnSound"
-        android:background="@drawable/button_long"
-        android:layout_gravity="center_horizontal" />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/instruction"
+            android:id="@+id/btnInstruction"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/button_long"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:textSize="25sp" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/language"
-        android:id="@+id/btnLanguage"
-        android:background="@drawable/button_long"
-        android:layout_gravity="center_horizontal" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/quit"
-        android:id="@+id/btnQuit"
-        android:layout_gravity="center_horizontal"
-        android:background="@drawable/button_long" />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/quit"
+            android:id="@+id/btnQuit"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/button_long"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:textSize="25sp" />
+    </LinearLayout>
 
 </LinearLayout>

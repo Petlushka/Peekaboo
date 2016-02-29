@@ -75,17 +75,8 @@ class Figure extends GameObjects{
         return rotation;
     }
 
-    public int getIndex() {
-        return index;
-    }
-
     public void setRotation(int rotation) {
         this.rotation = rotation;
-    }
-
-    @Override
-    public void update() {
-
     }
 
     public void rotate(){
@@ -110,8 +101,4 @@ class Figure extends GameObjects{
         setY(y1 - getHeight() / 2);
     }
 
-    public void stopMove(int x, int y) {
-
-
-    }
 }

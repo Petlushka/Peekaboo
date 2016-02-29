@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,11 +18,11 @@ import java.util.ArrayList;
  */
 public class ButtonsAdapter extends BaseAdapter {
 
-    Context ctx;
-    int [] data;
-    int diametr;
-    int levelMax;
-    SharedPreferences sPref;
+    private Context ctx;
+    private int [] data;
+    private int diametr;
+    private int levelMax;
+    private SharedPreferences sPref;
 
     public ButtonsAdapter(Context ctx, int [] data, int diametr) {
         this.ctx = ctx;
@@ -72,16 +73,19 @@ public class ButtonsAdapter extends BaseAdapter {
             public void onClick(View v) {
                 int lv = v.getId();
                 Intent intent = new Intent(ctx, GameActivity.class);
-                intent.putExtra("level", lv);
+                SharedPreferences spref = ctx.getSharedPreferences("MyPref", Context.MODE_PRIVATE);
+                SharedPreferences.Editor ed = spref.edit();
+                ed.putInt("Level", lv);
+                ed.putBoolean("start", true);
+                for(int i = 1; i <=4; i++) {
+                    ed.putInt("figure" + i + "position", 0);
+                    ed.putInt("figure" + i + "rotation", 1);
+                }
+                ed.commit();
                 ctx.startActivity(intent);
             }
         });
         return button;
-    }
-
-    public void setLevelMax(int levelMax){
-        this.levelMax = levelMax;
-
     }
 
     public int getLevelMax() {

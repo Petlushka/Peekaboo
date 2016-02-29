@@ -13,8 +13,4 @@ class GameField extends GameObjects {
         setBitmapName("gamefield");
     }
 
-    @Override
-    public void update() {
-
-    }
 }

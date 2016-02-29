@@ -13,27 +13,7 @@ public class Animals extends GameObjects {
         setWidth(height);
         setHeight(height);
         this.index = index;
-        switch (index){
-            case 1:
-                setBitmapName("elephant");
-                break;
-            case 2:
-                setBitmapName("giraffe");
-                break;
-            case 3:
-                setBitmapName("hippo");
-                break;
-            case 4:
-                setBitmapName("monkey");
-                break;
-            case 5:
-                setBitmapName("zebra");
-                break;
-        }
+        setBitmapName("m"+index);
     }
 
-    @Override
-    public void update() {
-
-    }
 }

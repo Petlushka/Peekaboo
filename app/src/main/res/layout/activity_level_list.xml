@@ -15,7 +15,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/levels"
         android:id="@+id/textView"
-        android:fontFeatureSettings="\@assets/Bobblebod.ttf"
+        android:fontFamily="\@assets/Bobblebod.ttf"
         android:focusable="true"
         android:layout_gravity="center_horizontal"
         android:textColor="#feff83" />

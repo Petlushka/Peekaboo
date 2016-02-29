@@ -20,13 +20,13 @@ public class LevelsActivity extends Activity {
 
     private int width;
     private int height;
-    GridView gridView;
-    TextView tvLevels;
-    int levelMax;
-    SharedPreferences sPref;
-    ButtonsAdapter adapter;
-    int [] data = new int [48] ;
-    int diameter;
+    private GridView gridView;
+    private TextView tvLevels;
+    private int levelMax;
+    private SharedPreferences sPref;
+    private ButtonsAdapter adapter;
+    private int [] data = new int [48] ;
+    private int diameter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,10 +38,7 @@ public class LevelsActivity extends Activity {
 
         width = resolution.x;
         height = resolution.y;
-        int buttonWidth = width / 8;
-        int buttonHeight = height / 8;
-        diameter = Math.min(buttonWidth, buttonHeight);
-       //d Log.d("MyLogs", "heightButton = " + heightButton);
+        diameter = Math.min(width / 8, height / 8);
         loadMaxLevel();
         for(int i = 0; i < 48; i ++){
             data[i] = i+1;
@@ -73,26 +70,6 @@ public class LevelsActivity extends Activity {
             adapter = new ButtonsAdapter(this, data, diameter);
             gridView.setAdapter(adapter);
         }
-       /* adapter = new ButtonsAdapter(this, data, heightButton);
-        gridView.setAdapter(adapter);
-
-        if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE){
-            gridView.setNumColumns(8);
-        } else {
-            gridView.setNumColumns(6);
-        }
-        gridView.setVerticalSpacing(10);
-       // gridView.setColumnWidth(height);
-        gridView.setStretchMode(GridView.STRETCH_SPACING_UNIFORM);*/
-
-
-
-
-    }
-
-    @Override
-    protected void onRestart() {
-        super.onRestart();
     }
 
     private void loadMaxLevel() {
