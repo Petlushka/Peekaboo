@@ -4,6 +4,7 @@ import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
+import android.graphics.Point;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -21,25 +23,35 @@ import android.widget.TextView;
 
 public class Instructions extends Activity implements View.OnClickListener{
 
-    int page = 1;
-    RelativeLayout view;
-    Button btnBack, btnNext;
-    TextView text;
+    private int page = 1;
+    private RelativeLayout view;
+    private Button btnBack, btnNext;
+    private TextView text;
+    private int width;
+    private int height;
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_instructions);
+        Display display = getWindowManager().getDefaultDisplay();
+        Point resolution = new Point();
+        display.getSize(resolution);
+        width = resolution.x;
+        height = resolution.y;
         view = (RelativeLayout)findViewById(R.id.llInstructions);
+        view.setBackgroundResource(R.drawable.study1);
         btnBack = (Button)findViewById(R.id.btnBack);
         btnBack.setOnClickListener(this);
+        btnBack.setWidth(width/4);
         btnNext = (Button)findViewById(R.id.btnNext);
         btnNext.setOnClickListener(this);
+        btnNext.setWidth(width/4);
         text = (TextView)findViewById(R.id.tvInstruction);
+        text.setHeight(height / 4);
         text.setText(R.string.instruction1);
         text.setTypeface(Typeface.createFromAsset(getAssets(), "Bobblebod.ttf"));
-        text.setTextSize(30);
     }
 
     @Override
