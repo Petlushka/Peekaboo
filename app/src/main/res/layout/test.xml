@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/finish_dialog"
+    android:layout_margin="0dp"
+    android:id="@+id/startLevelLayout"
+    android:theme="@style/You.Dialog"
+    android:padding="20dp">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/target"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
+        android:textSize="35sp"
+        android:fontFamily="\@assets/Bobblebod.ttf"
+        android:layout_gravity="center_horizontal"
+        android:textColor="#feff83"
+        android:gravity="center" />
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/dialogList"
+        android:layout_gravity="center_horizontal"
+        android:paddingBottom="20dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/ok"
+        android:id="@+id/btnStartLevel"
+        android:background="@drawable/button_long"
+        android:layout_gravity="center_horizontal"
+        android:padding="10dp" />
+
+</LinearLayout>
