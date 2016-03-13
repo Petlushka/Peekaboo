@@ -42,7 +42,8 @@ public class StartLevelDialog extends Dialog implements View.OnClickListener{
         this.width = width;
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         view = (LinearLayout)getLayoutInflater().inflate(R.layout.start_level_dialog, null);
-        view.setMinimumWidth((int) (width * 0.8));
+        view.setMinimumWidth((int) (this.width * 0.75));
+
 
         Typeface font = Typeface.createFromAsset(context.getAssets(), "Bobblebod.ttf");
         tvStartDialog = (TextView)view.findViewById(R.id.tvStartDialog);
@@ -77,6 +78,7 @@ public class StartLevelDialog extends Dialog implements View.OnClickListener{
         ed.putBoolean("start", false);
         ed.commit();
         gm.setStartLevel(false);
+        gm.setLevelComplete(false);
         dismiss();
     }
 }

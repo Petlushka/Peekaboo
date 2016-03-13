@@ -35,10 +35,10 @@
         android:text="@string/play"
         android:id="@+id/btnPlay"
         android:layout_gravity="center_horizontal"
-        android:background="@drawable/button_long"
+        android:background="@drawable/button_big"
         android:layout_margin="5dp"
         android:layout_weight="1"
-        android:textSize="20sp" />
+        android:textSize="@dimen/button_text" />
 
     <Button
         android:layout_width="match_parent"
@@ -46,10 +46,10 @@
         android:text="@string/instruction"
         android:id="@+id/btnInstruction"
         android:layout_gravity="center_horizontal"
-        android:background="@drawable/button_long"
+        android:background="@drawable/button_big"
         android:layout_margin="5dp"
         android:layout_weight="1"
-        android:textSize="20sp" />
+        android:textSize="@dimen/button_text" />
 
     <Button
         android:layout_width="match_parent"
@@ -57,9 +57,9 @@
         android:text="@string/quit"
         android:id="@+id/btnQuit"
         android:layout_gravity="center_horizontal"
-        android:background="@drawable/button_long"
+        android:background="@drawable/button_big"
         android:layout_margin="5dp"
         android:layout_weight="1"
-        android:textSize="20sp" />
+        android:textSize="@dimen/button_text" />
 
 </LinearLayout>

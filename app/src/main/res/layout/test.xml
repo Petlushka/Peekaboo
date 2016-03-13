@@ -33,7 +33,7 @@
         android:layout_height="wrap_content"
         android:text="@string/ok"
         android:id="@+id/btnStartLevel"
-        android:background="@drawable/button_long"
+        android:background="@drawable/button_big"
         android:layout_gravity="center_horizontal"
         android:padding="10dp" />
 

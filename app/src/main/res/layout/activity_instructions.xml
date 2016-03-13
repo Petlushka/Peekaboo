@@ -13,15 +13,17 @@
         android:layout_alignParentStart="false"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="false"
-        android:background="#f0f38c"
+        android:background="@drawable/instruction_text"
         android:gravity="center_vertical|center_horizontal"
-        android:textColor="@android:color/black" />
+        android:textColor="@android:color/black"
+        android:padding="10dp"
+        android:textSize="@dimen/instruction_text" />
     <Button
         android:layout_width="80dp"
         android:layout_height="40dp"
         android:id="@+id/btnBack"
         android:text="@string/back"
-        android:background="@drawable/button_long"
+        android:background="@drawable/button_big"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true" />
     <Button
@@ -29,7 +31,7 @@
         android:layout_height="40dp"
         android:id="@+id/btnNext"
         android:text="@string/next"
-        android:background="@drawable/button_long"
+        android:background="@drawable/button_big"
         android:layout_weight="1"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true" />

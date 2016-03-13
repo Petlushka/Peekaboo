@@ -4,14 +4,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
-
-import java.util.ArrayList;
 
 /**
  * Created by Irina on 03.01.2016.
@@ -66,7 +62,7 @@ public class ButtonsAdapter extends BaseAdapter {
         button.setWidth(diametr);
         button.setHeight(diametr);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-            button.setBackground(ctx.getResources().getDrawable(R.drawable.button));
+            button.setBackground(ctx.getApplicationContext().getResources().getDrawable(R.drawable.button_sm));
         }
         button.setOnClickListener(new View.OnClickListener() {
             @Override

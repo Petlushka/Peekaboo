@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/dialogLayout"
-    android:background="@drawable/finish_dialog"
+    android:background="@drawable/dialog_bg"
     android:layout_margin="0dp"
     android:theme="@style/You.Dialog">
 
@@ -40,7 +40,7 @@
             android:layout_height="wrap_content"
             android:text="@string/main_menu"
             android:id="@+id/btnMainMenu"
-            android:background="@drawable/button_long"
+            android:background="@drawable/button_big"
             android:layout_weight="1"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="10dp"
@@ -52,7 +52,7 @@
             android:layout_height="wrap_content"
             android:text="@string/next_level"
             android:id="@+id/btnNextLevel"
-            android:background="@drawable/button_long"
+            android:background="@drawable/button_big"
             android:layout_weight="1"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"

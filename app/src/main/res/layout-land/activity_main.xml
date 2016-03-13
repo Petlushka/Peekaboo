@@ -35,7 +35,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:gravity="center_horizontal"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:weightSum="3">
 
         <Button
             android:layout_width="wrap_content"
@@ -43,7 +44,7 @@
             android:text="@string/play"
             android:id="@+id/btnPlay"
             android:layout_gravity="center_horizontal"
-            android:background="@drawable/button_long"
+            android:background="@drawable/button_big"
             android:layout_margin="5dp"
             android:layout_weight="1"
             android:textSize="25sp" />
@@ -54,7 +55,7 @@
             android:text="@string/instruction"
             android:id="@+id/btnInstruction"
             android:layout_gravity="center_horizontal"
-            android:background="@drawable/button_long"
+            android:background="@drawable/button_big"
             android:layout_margin="5dp"
             android:layout_weight="1"
             android:textSize="25sp" />
@@ -65,7 +66,7 @@
             android:text="@string/quit"
             android:id="@+id/btnQuit"
             android:layout_gravity="center_horizontal"
-            android:background="@drawable/button_long"
+            android:background="@drawable/button_big"
             android:layout_margin="5dp"
             android:layout_weight="1"
             android:textSize="25sp" />

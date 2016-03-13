@@ -92,11 +92,11 @@ public class GameView extends SurfaceView implements Runnable{
         if(ourHolder.getSurface().isValid()){
             canvas = ourHolder.lockCanvas();
             canvas.drawBitmap(bg.prepareBitmap(getContext()), 0, 0, paint);
-            if(startLevel == true || levelComplete == true) {
-
+            if(startLevel || levelComplete) {
+                Log.d("MyLogs", "My dialog");
             } else {
                 paint.setTextAlign(Paint.Align.CENTER);
-                paint.setColor(Color.YELLOW);
+                paint.setColor(context.getResources().getColor(R.color.text_color));
                 paint.setTextSize(45);
                 paint.setStyle(Paint.Style.STROKE);
                 paint.setTypeface(Typeface.createFromAsset(getContext().getAssets(), "Bobblebod.ttf"));
@@ -115,7 +115,6 @@ public class GameView extends SurfaceView implements Runnable{
 
                 for (int i = 0; i < figures.length; i++) {
                     canvas.drawBitmap(figures[i].prepareBitmap(getContext()), figures[i].getX(), figures[i].getY(), paint);
-
                 }
             }
 
@@ -150,9 +149,8 @@ public class GameView extends SurfaceView implements Runnable{
         startLevel = spref.getBoolean("start", false);
         loadLevel(level);
         load();
-        if (startLevel == true){
-            int height = Math.min(screenXResolution, screenYResolution);
-            StartLevelDialog startDialog = new StartLevelDialog(context, target, spref.getInt("Level", -1), this, height);
+        if (startLevel){
+            StartLevelDialog startDialog = new StartLevelDialog(context, target, spref.getInt("Level", -1), this, screenXResolution);
             startDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
             startDialog.setCancelable(false);
             startDialog.show();
@@ -220,7 +218,7 @@ public class GameView extends SurfaceView implements Runnable{
                     index = -1;
                     if(isCorrectSolution()){
                         try {
-                            gameThread.join(2000);
+                            gameThread.join(1000);
                             levelComplete = true;
                         } catch (InterruptedException e) {
                             e.printStackTrace();
@@ -331,5 +329,7 @@ public class GameView extends SurfaceView implements Runnable{
         this.level = level;
     }
 
-
+    public void setLevelComplete(boolean levelComplete) {
+        this.levelComplete = levelComplete;
+    }
 }

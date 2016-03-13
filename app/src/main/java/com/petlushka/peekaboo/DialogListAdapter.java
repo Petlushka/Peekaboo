@@ -1,6 +1,7 @@
 package com.petlushka.peekaboo;
 
 import android.content.Context;
+import android.content.res.Configuration;
 import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
 import android.os.Build;
@@ -69,6 +70,8 @@ public class DialogListAdapter extends BaseAdapter {
 
         }
         int height = width / 6;
+        if (ctx.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE)
+            height = width / 10;
         image.setMinimumHeight(height);
         image.setMinimumWidth(height);
         image.setMaxHeight(height);
@@ -78,10 +81,9 @@ public class DialogListAdapter extends BaseAdapter {
         text.setText(" x" + level[position][1]);
         float textHeight = height * 0.4f;
         text.setTextSize(textHeight);
-        //text.setWidth(height);
         text.setHeight(height);
+        text.setWidth(height);
         text.setTypeface(Typeface.createFromAsset(ctx.getAssets(), "Bobblebod.ttf"));
-
         return view;
     }
 }
